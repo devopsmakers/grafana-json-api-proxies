@@ -124,3 +124,7 @@ def _convert_ical_to_annotations(ical_data, tags):
                     f'level=ERROR msg="decoding event failed" event_summary="{component.get("summary")}" event_dtstart="{component.get("dtstart")}" event_dtstamp="{component.get("dtstamp")}" event_dtend="{component.get("dtend")}"'
                 )
     return ical_annotations
+
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
