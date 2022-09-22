@@ -2,9 +2,12 @@
 
 ## Configuration
 
-### Environment Variables
+### HTTP Headers
 #### Required
-- `ICAL_URL` - The URL to the iCal feed or file. Examples: `file://path/to/file.ics`,
-  `https://my.calendar.org/feeds/calendar.ics`
+- `X-ICAL-URL` - The URL of the iCal feed.
+#### Optional
+- `X-TAGS` - A comma delimited list of tags for the annotations. Example: `maintenance,IT,planned`
+
+### Environment Variables
 #### Optional
 - `CACHE_TTL` - Default: 1800 - The number of seconds that results should be cached for.
