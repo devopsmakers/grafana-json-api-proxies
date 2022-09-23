@@ -33,6 +33,6 @@ jobs:
           pip install -r requirements.txt
           pip install tox tox-gh-actions
       - name: Test with Tox
-        runx: |
+        run: |
           cd ${{ matrix.app }}
           tox
