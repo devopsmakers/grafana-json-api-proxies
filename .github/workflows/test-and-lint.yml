@@ -2,12 +2,12 @@ name: Test and Lint
 on:
   push:
     branches:
-      - main
+    - main
   pull_request:
     branches:
-      - main
+    - main
   schedule:
-    - cron: '30 11 * * *'
+  - cron: '30 11 * * *'
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -21,18 +21,18 @@ jobs:
         - '3.9'
         - '3.10'
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          cd ${{ matrix.app }}
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install tox tox-gh-actions
-      - name: Test with Tox
-        run: |
-          cd ${{ matrix.app }}
-          tox
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        cd ${{ matrix.app }}
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install tox tox-gh-actions
+    - name: Test with Tox
+      run: |
+        cd ${{ matrix.app }}
+        tox
