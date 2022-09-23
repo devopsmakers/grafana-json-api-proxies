@@ -1,0 +1,25 @@
+apiVersion: v1
+entries:
+  simplejson-proxy:
+  - annotations:
+      artifacthub.io/changes: '- version 0.0.1'
+    apiVersion: v2
+    appVersion: 0.0.1
+    created: "2022-09-23T12:39:20.792095079Z"
+    description: A Helm chart for the SimpleJson Proxies
+    digest: bd16823858756b03045e8d416cea1c8a2a8a7a372350304bd285490edcc95b03
+    home: https://github.com/devopsmakers/grafana-simplejson-proxy-plugins/tree/main/helm-charts/simplejson-proxy
+    keywords:
+    - proxy
+    - grafana
+    - simplejson
+    maintainers:
+    - name: Tim Birkett
+    name: simplejson-proxy
+    sources:
+    - https://devopsmakers/grafana-simplejson-proxy-plugins/
+    type: application
+    urls:
+    - https://github.com/devopsmakers/grafana-simplejson-proxies/releases/download/simplejson-proxy-0.0.1/simplejson-proxy-0.0.1.tgz
+    version: 0.0.1
+generated: "2022-09-23T12:39:20.792099179Z"
