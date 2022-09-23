@@ -1,4 +1,5 @@
 # grafana-simplejson-proxies
+
 A collection of proxy backends for the Grafana SimpleJson plugin. See:
 - https://grafana.com/grafana/plugins/grafana-simple-json-datasource/
 
