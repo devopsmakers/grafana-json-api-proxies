@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "ical-simplejson-proxy.fullname" . }}
+  name: {{ include "simplejson-proxy.fullname" . }}
   labels:
-    {{- include "ical-simplejson-proxy.labels" . | nindent 4 }}
+    {{- include "simplejson-proxy.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "ical-simplejson-proxy.selectorLabels" . | nindent 6 }}
+      {{- include "simplejson-proxy.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "ical-simplejson-proxy.selectorLabels" . | nindent 8 }}
+        {{- include "simplejson-proxy.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

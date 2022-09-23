@@ -1,4 +1,4 @@
-# Default values for ical-simplejson-proxy
+# Default values for simplejson-proxy
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -10,8 +10,8 @@ image:
   tag: ""
 
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: "ical-simplejson-proxy"
+fullnameOverride: "ical-simplejson-proxy"
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
