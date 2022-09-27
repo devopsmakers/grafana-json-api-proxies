@@ -8,8 +8,8 @@ A Helm chart for the SimpleJson Proxies
 
 ## Installation
 ```
-helm repo add devopsmakers https://devopsmakers.github.io/charts/
-helm install simplejson-proxy devopsmakers/simplejson-proxy
+helm repo add grafana-simplejson-proxies https://devopsmakers.github.io/grafana-simplejson-proxies/
+helm install simplejson-proxy grafana-simplejson-proxies/simplejson-proxy
 ```
 
 ## Maintainers
