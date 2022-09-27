@@ -18,10 +18,10 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config["CORS_HEADERS"] = "Content-Type"
 
-methods = ["GET", "POST", "HEAD", "OPTIONS"]
+methods = ["GET", "HEAD", "POST", "OPTIONS"]
 
 
-@app.route("/")
+@app.route("/", methods=methods)
 def index():
     return "OK"
 
@@ -38,30 +38,16 @@ def query():
 
 @app.route("/annotations", methods=methods)
 def annotations():
-    if request.method == "POST":
-        annotation = request.json.get(
-            "annotation",
-            {
-                "name": "Test Annotation",
-                "datasource": {
-                    "type": "grafana-simple-json-datasource",
-                    "uid": "TEST",
-                },
-                "enable": True,
-                "iconColor": "red",
-                "query": "#test",
-            },
-        )
+    if request.method in ["GET", "POST"]:
         ical_url = request.headers.get(
             "X-ICAL-URL",
             f"file://{os.path.dirname(os.path.realpath(__file__))}/fixtures/calendar.ics",
         )
 
-        tags = []
         if "X-TAGS" in request.headers:
-            tags = request.headers.get("X-TAGS").split(",")
+            tags = request.headers.get("X-TAGS")
 
-        return _ical_annotations(ical_url, tags, annotation)
+        return _ical_annotations(ical_url, tags)
     return []
 
 
@@ -75,16 +61,16 @@ def tag_values():
     return []
 
 
-def _ical_annotations_cache_key(url: str, tags: list, *args):
-    return f'{url}/{",".join(tags)}'
+def _ical_annotations_cache_key(url: str, tags: str, *args):
+    return f"{url}/{tags}"
 
 
 @cached(CACHE, _ical_annotations_cache_key)
-def _ical_annotations(url: str, tags: list, annotation: dict):
+def _ical_annotations(url: str, tags: str):
     ical_data = _fetch_ical_data(url)
     ical_as_annotations = _convert_ical_to_annotations(ical_data, tags)
 
-    return [dict(x, **{"annotation": annotation}) for x in ical_as_annotations]
+    return ical_as_annotations
 
 
 def _fetch_ical_data(url: str):
@@ -109,16 +95,25 @@ def _convert_ical_to_annotations(ical_data, tags):
     for component in ical_calendar.walk():
         if component.name == "VEVENT":
             try:
-                ical_annotations.append(
-                    {
-                        "time": int(
-                            time.mktime(component.get("dtstart").dt.timetuple()) * 1000
-                        ),
-                        "title": component.get("summary"),
-                        "tags": tags,
-                        "text": component.get("description", ""),
-                    }
-                )
+                ical_annotation = {
+                    "time": int(
+                        time.mktime(component.get("dtstart").dt.timetuple()) * 1000
+                    ),
+                    "title": component.get("summary"),
+                    "tags": tags,
+                    "text": component.get("description", ""),
+                    "uid": component.get("uid"),
+                }
+
+                try:
+                    ical_annotation["timeEnd"] = int(
+                        time.mktime(component.get("dtend").dt.timetuple()) * 1000
+                    )
+                except AttributeError:
+                    pass
+
+                ical_annotations.append(ical_annotation)
+
             except AttributeError:
                 print(
                     f'level=ERROR msg="decoding event failed" event_summary="{component.get("summary")}" event_dtstart="{component.get("dtstart")}" event_dtstamp="{component.get("dtstamp")}" event_dtend="{component.get("dtend")}"'

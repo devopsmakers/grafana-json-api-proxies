@@ -1,4 +1,4 @@
-# ical-simplejson-proxy
+# ical-proxy
 
 ## Configuration
 

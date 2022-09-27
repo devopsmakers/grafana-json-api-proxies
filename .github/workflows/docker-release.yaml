@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         app:
-        - ical-simplejson-proxy
+        - ical-proxy
     steps:
     - name: Check out the repo
       uses: actions/checkout@v3
