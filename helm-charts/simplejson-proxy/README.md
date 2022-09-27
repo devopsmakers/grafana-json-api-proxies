@@ -4,11 +4,11 @@
 
 A Helm chart for the SimpleJson Proxies
 
-**Homepage:** <https://github.com/devopsmakers/grafana-simplejson-proxy-plugins/tree/main/helm-charts/simplejson-proxy>
+**Homepage:** <https://github.com/devopsmakers/grafana-simplejson-proxies/tree/main/helm-charts/simplejson-proxy>
 
 ## Installation
 ```
-helm repo add grafana-simplejson-proxies https://devopsmakers.github.io/grafana-simplejson-proxies/
+helm repo add grafana-simplejson-proxies https://devopsmakers.github.io/grafana-simplejson-proxies
 helm install simplejson-proxy grafana-simplejson-proxies/simplejson-proxy
 ```
 
@@ -20,7 +20,7 @@ helm install simplejson-proxy grafana-simplejson-proxies/simplejson-proxy
 
 ## Source Code
 
-* <https://devopsmakers/grafana-simplejson-proxy-plugins/>
+* <https://github.com/devopsmakers/grafana-simplejson-proxies/>
 
 ## Values
 

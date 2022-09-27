@@ -27,10 +27,10 @@ keywords:
   - grafana
   - simplejson
 
-home: https://github.com/devopsmakers/grafana-simplejson-proxy-plugins/tree/main/helm-charts/simplejson-proxy
+home: https://github.com/devopsmakers/grafana-simplejson-proxies/tree/main/helm-charts/simplejson-proxy
 
 sources:
-  - https://devopsmakers/grafana-simplejson-proxy-plugins/
+  - https://github.com/devopsmakers/grafana-simplejson-proxies/
 
 maintainers:
   - name: Tim Birkett
