@@ -1,0 +1,22 @@
+{{ template "chart.header" . }}
+{{ template "chart.deprecationWarning" . }}
+
+{{ template "chart.badgesSection" . }}
+
+{{ template "chart.description" . }}
+
+{{ template "chart.homepageLine" . }}
+
+## Installation
+```
+helm repo add grafana-json-apis-proxies https://devopsmakers.github.io/grafana-json-apis-proxies
+helm install {{ template "chart.name" . }} grafana-json-api-proxies/{{ template "chart.name" . }}
+```
+
+{{ template "chart.maintainersSection" . }}
+
+{{ template "chart.sourcesSection" . }}
+
+{{ template "chart.requirementsSection" . }}
+
+{{ template "chart.valuesSection" . }}
