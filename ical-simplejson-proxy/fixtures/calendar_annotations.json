@@ -1,1 +1,0 @@
-[{"annotation":{"datasource":{"type":"grafana-simple-json-datasource","uid":"0x5XTb7Vk"},"enable":true,"iconColor":"red","name":"Default Annotation","query":"#test"},"tags":[],"text":"Something is happening at this time","time":1663327800000,"title":"Test event"}]
