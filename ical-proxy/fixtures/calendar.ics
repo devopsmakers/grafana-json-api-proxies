@@ -7,9 +7,25 @@ X-WR-CALNAME:Scheduled Maintenance
 X-WR-TIMEZONE:Europe/London
 X-WR-CALDESC:A calendar for IT/Platform/Other maintenance events
 BEGIN:VEVENT
+DTSTART:20221003T110000Z
+DTEND:20221003T113000Z
+DTSTAMP:20221003T083457Z
+UID:3nan0umqa6tt125t7h6dfetdu5@google.com
+CREATED:20220929T145219Z
+DESCRIPTION:Bob and Jim will be working together to enable GitHub Actions o
+ n the GitHub Enterprise Server. This requires a restart of services on the
+ server.
+LAST-MODIFIED:20220929T152907Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:GitHub Enterprise: Enable Actions
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
 DTSTART:20220916T113000Z
 DTEND:20220916T123000Z
-DTSTAMP:20220921T132404Z
+DTSTAMP:20221003T083457Z
 UID:0sgn0d9cqakfvm7rj6a8niq2re@google.com
 CREATED:20220916T093411Z
 DESCRIPTION:Something is happening at this time

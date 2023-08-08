@@ -39,9 +39,11 @@ def query():
 @app.route("/annotations", methods=methods)
 def annotations():
     if request.method in ["GET", "POST"]:
+        tags = ""
+
         ical_url = request.headers.get(
             "X-ICAL-URL",
-            f"file://{os.path.dirname(os.path.realpath(__file__))}/fixtures/calendar.ics",
+            f"file://{os.path.dirname(os.path.realpath(__file__))}/fixtures/something.ics",
         )
 
         if "X-TAGS" in request.headers:
