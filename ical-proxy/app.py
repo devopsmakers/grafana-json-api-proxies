@@ -74,9 +74,10 @@ def _ical_annotations(url: str, tags: str):
     return ical_as_annotations
 
 
-def _millis_timestamp(dt: datetime.datetime):
-    if isinstance(dt, datetime.date):
+def _millis_timestamp(dt):
+    if (not isinstance(dt, datetime.datetime)) and isinstance(dt, datetime.date):
         dt = datetime.datetime(dt.year, dt.month, dt.day, tzinfo=datetime.timezone.utc)
+
     return int(dt.timestamp() * 1000)
 
 
