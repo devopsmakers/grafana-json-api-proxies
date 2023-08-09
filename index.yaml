@@ -3,6 +3,29 @@ entries:
   json-api-proxy:
   - annotations:
       artifacthub.io/changes: |
+        - fix datetime handling
+    apiVersion: v2
+    appVersion: 0.0.3
+    created: "2023-08-09T15:25:17.349022028Z"
+    description: A Helm chart for the JSON API Proxies
+    digest: cf23006efea10cf3f3bc428cfb1c947bdb840d4abd42be965f9743627e8a011f
+    home: https://github.com/devopsmakers/grafana-json-api-proxies/tree/main/helm-charts/json-api-proxy
+    keywords:
+    - proxy
+    - grafana
+    - JSON
+    - API
+    maintainers:
+    - name: Tim Birkett
+    name: json-api-proxy
+    sources:
+    - https://github.com/devopsmakers/grafana-json-api-proxies/
+    type: application
+    urls:
+    - https://github.com/devopsmakers/grafana-json-api-proxies/releases/download/json-api-proxy-0.0.3/json-api-proxy-0.0.3.tgz
+    version: 0.0.3
+  - annotations:
+      artifacthub.io/changes: |
         - version 0.0.1
     apiVersion: v2
     appVersion: 0.0.2
@@ -47,4 +70,4 @@ entries:
     urls:
     - https://github.com/devopsmakers/grafana-json-api-proxies/releases/download/json-api-proxy-0.0.1/json-api-proxy-0.0.1.tgz
     version: 0.0.1
-generated: "2023-08-09T09:54:56.273858734Z"
+generated: "2023-08-09T15:25:17.349036428Z"
