@@ -15,6 +15,7 @@ CACHE_TTL = os.environ.get("CACHE_TTL", 1800)
 CACHE = TTLCache(maxsize=1000, ttl=CACHE_TTL)
 
 DATE_MIN = (1970, 1, 1)
+LOOK_AHEAD_MONTHS = 6
 
 app = Flask(__name__)
 
@@ -104,7 +105,7 @@ def _convert_ical_to_annotations(ical_data, tags):
     ical_annotations = []
     ical_calendar = icalendar.Calendar.from_ical(ical_data)
 
-    date_max = datetime.date.today() + relativedelta(years=1)
+    date_max = datetime.date.today() + relativedelta(months=LOOK_AHEAD_MONTHS)
 
     ical_events = recurring_ical_events.of(
         ical_calendar, components=["VEVENT"]
