@@ -2,8 +2,10 @@ import datetime
 import os
 
 import icalendar
+import recurring_ical_events
 import requests
 from cachetools import TTLCache, cached
+from dateutil.relativedelta import relativedelta
 from flask import Flask, abort, request
 from flask_cors import CORS
 from requests_file import FileAdapter
@@ -11,6 +13,8 @@ from requests_file import FileAdapter
 CACHE_TTL = os.environ.get("CACHE_TTL", 1800)
 
 CACHE = TTLCache(maxsize=1000, ttl=CACHE_TTL)
+
+DATE_MIN = (1970, 1, 1)
 
 app = Flask(__name__)
 
@@ -100,30 +104,35 @@ def _convert_ical_to_annotations(ical_data, tags):
     ical_annotations = []
     ical_calendar = icalendar.Calendar.from_ical(ical_data)
 
-    for component in ical_calendar.walk():
-        if component.name == "VEVENT":
-            try:
-                start_time = component.get("dtstart").dt
+    date_max = datetime.date.today() + relativedelta(years=1)
 
-                end_time = component.get("dtstart").dt
-                if "dtend" in component:
-                    end_time = component.get("dtend").dt
+    ical_events = recurring_ical_events.of(
+        ical_calendar, components=["VEVENT"]
+    ).between(DATE_MIN, date_max)
 
-                ical_annotation = {
-                    "time": _millis_timestamp(start_time),
-                    "timeEnd": _millis_timestamp(end_time),
-                    "title": component.get("summary"),
-                    "tags": tags,
-                    "text": component.get("description", ""),
-                    "uid": component.get("uid"),
-                }
+    for component in ical_events:
+        try:
+            start_time = component.get("dtstart").dt
 
-                ical_annotations.append(ical_annotation)
+            end_time = component.get("dtstart").dt
+            if "dtend" in component:
+                end_time = component.get("dtend").dt
 
-            except AttributeError as e:
-                print(
-                    f'level=ERROR {e} msg="decoding event failed" event_summary="{component.get("summary")}" event_dtstart="{component.get("dtstart")}" event_dtstamp="{component.get("dtstamp")}" event_dtend="{component.get("dtend")}"'
-                )
+            ical_annotation = {
+                "time": _millis_timestamp(start_time),
+                "timeEnd": _millis_timestamp(end_time),
+                "title": component.get("summary"),
+                "tags": tags,
+                "text": component.get("description", ""),
+                "uid": component.get("uid"),
+            }
+
+            ical_annotations.append(ical_annotation)
+
+        except AttributeError as e:
+            print(
+                f'level=ERROR {e} msg="decoding event failed" event_summary="{component.get("summary")}" event_dtstart="{component.get("dtstart")}" event_dtstamp="{component.get("dtstamp")}" event_dtend="{component.get("dtend")}"'
+            )
     return ical_annotations
 
 
